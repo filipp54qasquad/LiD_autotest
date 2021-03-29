@@ -1,3 +1,4 @@
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -125,6 +126,48 @@ public class lid_test_page {
     // }
 
     // }
+    @FindBy(xpath = "//div[@class=\"header__reg js-popup hide-def-scroll\"]")
+    private WebElement city;
+    public void openCity (){
+        city.click();
+
+    }
+    @FindBy(xpath = "//a[contains(text(), \"Новосибирск\")]")
+    private WebElement change;
+    public void changeCity() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class=\"locate__popular-list\"]")));
+        change.click();
+    }
+
+    @FindBy(xpath = "//a[@id=\"btn-save-user-locate\"]")
+    private WebElement city1;
+    public void saveCity(){
+        city1.click();
+    }
+    //@FindBy(xpath = "//div[@class=\"header__reg js-popup hide-def-scroll\"]/div[contains(text(), \"Новосибирск\")]")
+
+    public void cityInPage(){
+        String city11 = driver.findElement(By.xpath("//div[@class=\"header__reg js-popup hide-def-scroll\"]/div[contains(text(), \"Новосибирск\")]")).getText();
+        System.out.println(city11);
+        String city33 = "Новосибирск";
+        Assert.assertEquals(city11,city33);
+    }
+    @FindBy(xpath = "//div[@class=\"input input--with-button footer__input\"]")
+    private WebElement subscribe;
+    public void emailSubscribe(){
+        driver.findElement(By.xpath("//div[@class= \"input input--with-button footer__input\"]/input[@class=\"input__input\"]" +
+                "")).sendKeys("igor@mail.ru");
+    }
+
+    @FindBy(xpath = "//button[@id=\"subscribe-submit\"]")
+    private WebElement validationEmail;
+    public void emailValidation(){
+        validationEmail.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[@class=\"ui-input__success ui-input__validation\"]")));
+        System.out.println("E-mail валиден!");
+
+    }
+
 
 
 }
